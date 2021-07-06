@@ -105,7 +105,7 @@ def __download_comments(youtube_id, sort_by=SORT_BY_RECENT, sleep=.1):
                 author_id=comment.get('authorEndpoint', {}).get('browseEndpoint', {}).get('browseId'),
                 author_name=comment.get('authorText', {}).get('simpleText', ''),
                 comment=''.join([c['text'] for c in comment['contentText'].get('runs', [])]),
-                likes=int(comment.get('voteCount', {}).get('simpleText', '0')),
+                likes=comment.get('voteCount', {}).get('simpleText', '0'),
                 published_at=comment['publishedTimeText']['runs'][0]['text'],
                 parent_id=None
             )
