@@ -1,1 +1,1 @@
-from .downloader import download_comments
+from .downloader import download_comments, SORT_BY_POPULAR, SORT_BY_RECENT
