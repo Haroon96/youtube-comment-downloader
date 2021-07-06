@@ -33,7 +33,7 @@ def ajax_request(session, url, params=None, data=None, headers=None, retries=5, 
             time.sleep(sleep)
 
 
-def download_comments(youtube_id, sort_by=SORT_BY_RECENT, sleep=.1):
+def __download_comments(youtube_id, sort_by=SORT_BY_RECENT, sleep=.1):
     session = requests.Session()
     session.headers['User-Agent'] = USER_AGENT
 
@@ -126,3 +126,9 @@ def search_dict(partial, search_key):
         elif isinstance(current_item, list):
             for value in current_item:
                 stack.append(value)
+
+def download_comments(youtube_id, limit=100, sort_by=SORT_BY_RECENT):
+    for c, comment in enumerate(__download_comments(youtube_id, sort_by)):
+        yield comment
+        if c == limit:
+            break
